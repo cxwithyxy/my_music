@@ -16,6 +16,11 @@ class Parser:
     def next_element_in_qq_music_list(self) -> dict:
         return next(self.iter_qq_music_list)
 
+    def next_music_by_dict(self, music_obj: dict) -> (str, str):
+        music_name = music_obj["name"]
+        music_songer = music_obj["singer"][0]["name"]
+        return (music_name, music_songer)
+
     def next_music(self) -> (str, str):
         """获得下一首歌的信息
         
@@ -25,6 +30,4 @@ class Parser:
 
         """
         i = self.next_element_in_qq_music_list()
-        music_name = i["name"]
-        music_songer = i["singer"][0]["name"]
-        return (music_name, music_songer)
+        return self.next_music_by_dict(i)
