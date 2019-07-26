@@ -22,7 +22,6 @@ class Main():
             music_name, music_songer =self.qq_parser.next_music_by_dict(element)
             song = self.get_song(music_name, music_songer)
             self.song_list.append(song)
-            os.path.exists(test_file.txt)
             download_path = f"Z:\\歌\\{song.get_file_name()}"
             if(not  pathlib.Path(download_path).exist()):
                 print(f"{self.a}: {song}")
