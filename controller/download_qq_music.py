@@ -23,13 +23,13 @@ class Main():
             song = self.get_song(music_name, music_songer)
             self.song_list.append(song)
             download_path = f"Z:\\歌\\{song.get_file_name()}"
-            if(not  pathlib.Path(download_path).exist()):
+            if(not pathlib.Path(download_path).exists()):
                 print(f"{self.a}: {song}")
                 dl = Downloader(song.url, download_path)
                 dl.start()
             self.a += 1
             return song.to_dict()
-        pool = Pool(processes = 10)
+        pool = Pool(processes = 30)
         prs = pool.map(pool_do, self.qq_parser.iter_qq_music_list)
         pool.close()
         # json.dump(prs, open("songs.json", "w", encoding="utf8"))
