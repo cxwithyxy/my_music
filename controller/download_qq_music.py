@@ -1,4 +1,4 @@
-
+import json
 from ttjt.Ttjt import Ttjt
 from myparser.qq_music import Parser as QQParser
 from ttjt.song import Song
@@ -21,20 +21,11 @@ class Main():
             self.song_list.append(song)
             print(f"{self.a}: {song} {song.url}")
             self.a += 1
+            return song.to_dict()
         pool = Pool(processes = 10)
         prs = pool.map(pool_do, self.qq_parser.iter_qq_music_list)
         pool.close()
-        # a = 1
-        # while True:
-        #     try:
-        #         music_name, music_songer = self.qq_parser.next_music()
-        #     except:
-        #         break
-        #     # song = self.get_song(music_name, music_songer)
-        #     # self.song_list.append(song)
-        #     # print(f"{a}: {song}")
-        #     # print(f"{a}: {music_songer}")
-        #     a += 1
+        json.dump(prs, open("songs.json", "w", encoding="utf8"))
 
     def get_song(self, music_name:str , music_songer: str):
         ttjt = Ttjt()
