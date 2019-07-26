@@ -4,6 +4,8 @@ from myparser.qq_music import Parser as QQParser
 from ttjt.song import Song
 from multiprocessing.pool import ThreadPool as Pool
 from downloader.Downloader import Downloader
+import pathlib
+
 
 class Main():
 
@@ -20,10 +22,13 @@ class Main():
             music_name, music_songer =self.qq_parser.next_music_by_dict(element)
             song = self.get_song(music_name, music_songer)
             self.song_list.append(song)
-            print(f"{self.a}: {song}")
+            os.path.exists(test_file.txt)
+            download_path = f"Z:\\歌\\{song.get_file_name()}"
+            if(not  pathlib.Path(download_path).exist()):
+                print(f"{self.a}: {song}")
+                dl = Downloader(song.url, download_path)
+                dl.start()
             self.a += 1
-            dl = Downloader(song.url, f"Z:\\歌\\{song.get_file_name()}")
-            dl.start()
             return song.to_dict()
         pool = Pool(processes = 10)
         prs = pool.map(pool_do, self.qq_parser.iter_qq_music_list)
