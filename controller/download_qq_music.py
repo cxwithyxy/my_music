@@ -6,49 +6,75 @@ from multiprocessing.pool import ThreadPool as Pool
 from downloader.Downloader import Downloader
 import pathlib
 from file_io.Json_controller import Json_controller as JSONC
+import time
+import random
 
 class Main():
 
     qq_parser: QQParser
-    song_list = []
+    songs_json: JSONC
+    parse_qq_music_list_json: JSONC
     a = 1
 
     def start(self):
-        self.qq_parser = QQParser("qq_music_list.json")
-
-        parse_qq_music = self.qq_parser.get_parse_qq_music_list()
-        jsonc = JSONC("parse_qq_music_list.json")
-        if(not jsonc.file_is_exists()):
-            jsonc.set_data(parse_qq_music)
-            jsonc.save()
-
-        # while(True):
-        #     q=input("==>>")
-        #     if(q=="q"):
-        #         jsonc.auto_save_stop()
-        #     pass
+        self.parse_qq_music_list_json = JSONC("parse_qq_music_list.json")
+        if(not self.parse_qq_music_list_json.file_is_exists()):
+            self.qq_parser = QQParser("qq_music_list.json")
+            parse_qq_music = self.qq_parser.get_parse_qq_music_list()
+            self.parse_qq_music_list_json.set_data(parse_qq_music)
+            self.parse_qq_music_list_json.save()
+        
+        self.songs_json = JSONC("songs.json")
+        self.songs_json.auto_save_start(3)
+        self.qq_music_list_to_song_list()
+       
         # self.qq_music_list_to_song_list()
 
     def qq_music_list_to_song_list(self):
         def pool_do(element):
-            music_name, music_songer =self.qq_parser.next_music_by_dict(element)
-            song = self.get_song(music_name, music_songer)
-            self.song_list.append(song)
-            download_path = f"Z:\\歌\\{song.get_file_name()}"
-            print(f"{self.a}: {song}")
-            if(not pathlib.Path(download_path).exists()):
-                dl = Downloader(song.url, download_path)
-                dl.start()
+            music_name = element["music_name"]
+            music_songer = element["music_songer"]
+            is_in_songs_json = False
+            json_for_check = self.songs_json.get_data()
+            for i in json_for_check:
+                temp_song = Song().init_with_dict(i)
+                if(
+                    temp_song.title.find(music_name) != -1 
+                    and temp_song.author.find(music_songer) != -1 
+                ):
+                    is_in_songs_json = True
+                    break
+            
+            if(not is_in_songs_json):
+                # print(f"get {self.a}: {music_name}")
+                song = self.get_song(music_name, music_songer)
+                self.songs_json.get_data().append(song.to_dict())
+                print(f"finish {self.a}: {music_name}")
+            # download_path = f"Z:\\歌\\{song.get_file_name()}"
+            # if(not pathlib.Path(download_path).exists()):
+            #     dl = Downloader(song.url, download_path)
+            #     dl.start()
             self.a += 1
-            return song.to_dict()
-        pool = Pool(processes = 1)
-        prs = pool.map(pool_do, self.qq_parser.iter_qq_music_list)
-        pool.close()
-        # json.dump(prs, open("songs.json", "w", encoding="utf8"))
+            
+        
+        pool = Pool(processes = 10)
+        print(f"songs_json: {len(self.songs_json.get_data())}")
+        print(f"parse_qq_music_list_json: {len(self.parse_qq_music_list_json.get_data())}")
+        prs = pool.map_async(pool_do, self.parse_qq_music_list_json.get_data())
+        while(True):
+            q=input("==>")
+            if(q=="q"):
+                print("exit")
+                exit()
+            if(q=="w"):
+                self.songs_json.json_data.append({"a":1})
+                print(self.songs_json.get_data())
+            if(q=="qq"):
+                self.songs_json.auto_save_stop()
 
     def get_song(self, music_name:str , music_songer: str):
         ttjt = Ttjt()
         ttjt.set_music_base("qq")
-        ttjt.search_music(music_name)
+        ttjt.search_music(f"{music_name}{music_songer}")
         song = ttjt.get_music_by_singer_name(music_songer)
         return song

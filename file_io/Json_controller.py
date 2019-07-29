@@ -14,9 +14,11 @@ class Json_controller:
 
     def __init__(self, path: str):
         self.path = path
+        if(not self.file_is_exists()):
+            self.set_data([])
 
     def get_data(self):
-        if(self.json_data):
+        if(not self.json_data == None):
             return self.json_data
         self.json_data = json.load(open(self.path, encoding="utf8"))
         return self.json_data
@@ -28,10 +30,9 @@ class Json_controller:
         json.dump(self.json_data, open(self.path, "w", encoding="utf8"))
 
     def thread_do(self, loop_time: int):
-        while True:
+        while True and self.auto_save_thread:
             time.sleep(loop_time)
             self.save()
-            print(f"save: {(self.json_data)}")
 
     def auto_save_start(self, loop_time: int):
         if(self.auto_save_thread):
@@ -44,11 +45,4 @@ class Json_controller:
         self.auto_save_thread.start()
 
     def auto_save_stop(self):
-        if(not self.auto_save_thread):
-            return
-        try:
-            self.auto_save_thread.terminate()
-            self.auto_save_thread = None
-        except:
-            self.auto_save_thread = None
-            exit()
+        self.auto_save_thread = None
