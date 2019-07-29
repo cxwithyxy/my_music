@@ -31,3 +31,16 @@ class Parser:
         """
         i = self.next_element_in_qq_music_list()
         return self.next_music_by_dict(i)
+
+    def get_parse_qq_music_list(self) -> list:
+        return_list = []
+        while True:
+            try:
+                music_name,music_songer = self.next_music()
+                return_list.append({
+                    "music_name": music_name,
+                    "music_songer": music_songer
+                })
+            except:
+                break
+        return return_list

@@ -14,8 +14,9 @@ class Main():
     a = 1
 
     def start(self):
-        self.qq_parser = QQParser("qq_music_list.json")
-        self.qq_music_list_to_song_list()
+        self.qq_parser = QQParser("qq_music_list2.json")
+        print(self.qq_parser.get_parse_qq_music_list())
+        # self.qq_music_list_to_song_list()
 
     def qq_music_list_to_song_list(self):
         def pool_do(element):
@@ -23,13 +24,13 @@ class Main():
             song = self.get_song(music_name, music_songer)
             self.song_list.append(song)
             download_path = f"Z:\\歌\\{song.get_file_name()}"
+            print(f"{self.a}: {song}")
             if(not pathlib.Path(download_path).exists()):
-                print(f"{self.a}: {song}")
                 dl = Downloader(song.url, download_path)
                 dl.start()
             self.a += 1
             return song.to_dict()
-        pool = Pool(processes = 30)
+        pool = Pool(processes = 1)
         prs = pool.map(pool_do, self.qq_parser.iter_qq_music_list)
         pool.close()
         # json.dump(prs, open("songs.json", "w", encoding="utf8"))
