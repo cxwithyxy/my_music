@@ -52,8 +52,8 @@ class Main():
                 lock = threading.Lock()
                 lock.acquire()
                 self.songs_json.get_data().append(song.to_dict())
+                print(f"finish {self.a}: {song}  {len(self.songs_json.get_data())}")
                 lock.release()
-                print(f"finish {self.a}: {music_name}")
             # download_path = f"Z:\\歌\\{song.get_file_name()}"
             # if(not pathlib.Path(download_path).exists()):
             #     dl = Downloader(song.url, download_path)
@@ -64,7 +64,15 @@ class Main():
         pool = Pool(processes = 10)
         print(f"songs_json: {len(self.songs_json.get_data())}")
         print(f"parse_qq_music_list_json: {len(self.parse_qq_music_list_json.get_data())}")
-        prs = pool.map_async(pool_do, self.parse_qq_music_list_json.get_data())
+        def pool_start ():
+            prs = pool.map(pool_do, self.parse_qq_music_list_json.get_data())
+        
+        threading.Thread(
+            target = pool_start,
+            args = (),
+            daemon = True
+        ).start()
+
         while(True):
             q=input("==>")
             if(q=="q"):
