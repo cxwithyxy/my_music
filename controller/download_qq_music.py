@@ -5,7 +5,7 @@ from ttjt.song import Song
 from multiprocessing.pool import ThreadPool as Pool
 from downloader.Downloader import Downloader
 import pathlib
-
+from file_io.Json_controller import Json_controller as JSONC
 
 class Main():
 
@@ -14,8 +14,19 @@ class Main():
     a = 1
 
     def start(self):
-        self.qq_parser = QQParser("qq_music_list2.json")
-        print(self.qq_parser.get_parse_qq_music_list())
+        self.qq_parser = QQParser("qq_music_list.json")
+
+        parse_qq_music = self.qq_parser.get_parse_qq_music_list()
+        jsonc = JSONC("parse_qq_music_list.json")
+        if(not jsonc.file_is_exists()):
+            jsonc.set_data(parse_qq_music)
+            jsonc.save()
+
+        # while(True):
+        #     q=input("==>>")
+        #     if(q=="q"):
+        #         jsonc.auto_save_stop()
+        #     pass
         # self.qq_music_list_to_song_list()
 
     def qq_music_list_to_song_list(self):
