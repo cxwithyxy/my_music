@@ -8,6 +8,7 @@ import pathlib
 from file_io.Json_controller import Json_controller as JSONC
 import time
 import random
+import threading
 
 class Main():
 
@@ -48,7 +49,10 @@ class Main():
             if(not is_in_songs_json):
                 # print(f"get {self.a}: {music_name}")
                 song = self.get_song(music_name, music_songer)
+                lock = threading.Lock()
+                lock.acquire()
                 self.songs_json.get_data().append(song.to_dict())
+                lock.release()
                 print(f"finish {self.a}: {music_name}")
             # download_path = f"Z:\\歌\\{song.get_file_name()}"
             # if(not pathlib.Path(download_path).exists()):

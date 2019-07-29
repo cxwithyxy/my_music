@@ -2,6 +2,7 @@ import json
 from threading import Thread
 import time
 import pathlib
+import threading
 
 class Json_controller:
     
@@ -27,12 +28,16 @@ class Json_controller:
         self.json_data = content
 
     def save(self):
+        print(f"save data: {len(self.json_data)}")
         json.dump(self.json_data, open(self.path, "w", encoding="utf8"))
 
     def thread_do(self, loop_time: int):
         while True and self.auto_save_thread:
             time.sleep(loop_time)
+            lock = threading.Lock()
+            lock.acquire()
             self.save()
+            lock.release()
 
     def auto_save_start(self, loop_time: int):
         if(self.auto_save_thread):
