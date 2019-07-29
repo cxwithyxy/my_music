@@ -1,4 +1,4 @@
-import json
+from file_io.Json_controller import Json_controller as JSONC
 class Parser:
     """Parser 歌单json解析器
     
@@ -10,7 +10,7 @@ class Parser:
     iter_qq_music_list: iter
 
     def __init__(self, json_path: str):
-        self.qq_music_list = json.load(open(json_path, encoding="utf8"))
+        self.qq_music_list = JSONC(json_path).get_data()
         self.iter_qq_music_list = iter(self.qq_music_list)
 
     def next_element_in_qq_music_list(self) -> dict:

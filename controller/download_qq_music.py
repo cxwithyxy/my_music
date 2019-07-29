@@ -1,6 +1,6 @@
 import json
 from ttjt.Ttjt import Ttjt
-from myparser.qq_music import Parser as QQParser
+from file_io.parser.qq_music import Parser as QQParser
 from ttjt.song import Song
 from multiprocessing.pool import ThreadPool as Pool
 from downloader.Downloader import Downloader
