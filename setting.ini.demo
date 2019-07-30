@@ -1,0 +1,5 @@
+﻿[path_set]
+qq_music_list = qq_music_list.json
+parse_qq_music_list = parse_qq_music_list.json
+songs = songs.json
+download_dir = ./
