@@ -31,6 +31,8 @@ class Main():
              
             self.songs_json = JSONC("songs.json")
             self.qq_music_list_to_song_list()
+
+            self.download_base_songs()
         
         threading.Thread(
             target = main_start,
@@ -39,7 +41,7 @@ class Main():
         ).start()
 
         while(True):
-            q=input("\n\n系统启动(输入q退出)==>\n\n")
+            q=input("\n\n系统启动(输入 q 退出)==>\n\n")
             if(q=="q"):
                 print("exit")
                 exit()
@@ -47,6 +49,7 @@ class Main():
                 self.songs_json.auto_save_stop()
 
     def qq_music_list_to_song_list(self):
+        counter = [1]
         def pool_do(element):
             music_name = element["music_name"]
             music_songer = element["music_songer"]
@@ -63,24 +66,37 @@ class Main():
             if not is_in_songs_json:
                 song = self.get_song(music_name, music_songer)
                 self.songs_json.get_data().append(song.to_dict())
-                print(f"同步#{self.a}: <{song}> 已存{len(self.songs_json.get_data())}")
-            # download_path = f"Z:\\歌\\{song.get_file_name()}"
-            # if(not pathlib.Path(download_path).exists()):
-            #     dl = Downloader(song.url, download_path)
-            #     dl.start()
-            self.a += 1
+                a = counter[0]
+                print(f"同步#{a}: <{song}> 已存{len(self.songs_json.get_data())}")
+            counter[0] += 1
         
         pool = Pool(processes = 10)
-        print(f"songs_json: {len(self.songs_json.get_data())}")
-        print(f"parse_qq_music_list_json: {len(self.parse_qq_music_list_json.get_data())}")
         self.songs_json.auto_save_start(3)
         prs = pool.map(
             pool_do,
             self.parse_qq_music_list_json.get_data()
         )
         self.songs_json.auto_save_stop()
-        print("songs.json 完成")
-        
+        print(f"songs.json ({len(self.songs_json.get_data())}) 完成")
+
+    def download_base_songs(self):
+        counter = [1]
+        def pool_do(song_dict: dict):
+            a = counter[0]
+            song = Song().init_with_dict(song_dict)
+            download_path = f"Z:\\歌\\{song.get_file_name()}"
+            if(not pathlib.Path(download_path).exists()):
+                dl = Downloader(song.url, download_path)
+                print(f"下载#{a}: {download_path}")
+                dl.start()
+                print(f"完成#{a}: {download_path}")
+            counter[0] += 1
+        pool = Pool(processes = 4)
+        pool.map(
+            pool_do,
+            self.songs_json.get_data()
+        )
+        print("download finish")
 
     def get_song(self, music_name:str , music_songer: str):
         ttjt = Ttjt()
