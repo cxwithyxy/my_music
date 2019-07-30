@@ -9,27 +9,31 @@ from file_io.Json_controller import Json_controller as JSONC
 import time
 import random
 import threading
+from file_io.Config_controller import Config_controller as ConfC
 
 class Main():
 
     qq_parser: QQParser
     songs_json: JSONC
     parse_qq_music_list_json: JSONC
-    a = 1
-    lock: threading.Lock
+    confc: ConfC
+
+    def __init__(self):
+        self.confc = confc = ConfC("setting.ini")
+        self.confc.cd("path_set")
 
     def start(self):
         
         def main_start ():
-            self.parse_qq_music_list_json = JSONC("parse_qq_music_list.json")
+            self.parse_qq_music_list_json = JSONC(self.confc.get("parse_qq_music_list"))
             if(not self.parse_qq_music_list_json.file_is_exists()):
-                self.qq_parser = QQParser("qq_music_list.json")
+                self.qq_parser = QQParser(self.confc.get("qq_music_list"))
                 parse_qq_music = self.qq_parser.get_parse_qq_music_list()
                 self.parse_qq_music_list_json.set_data(parse_qq_music)
                 self.parse_qq_music_list_json.save()
                 print("保存 parse_qq_music_list.json 成功")
              
-            self.songs_json = JSONC("songs.json")
+            self.songs_json = JSONC(self.confc.get("songs"))
             self.qq_music_list_to_song_list()
 
             self.download_base_songs()
@@ -83,14 +87,15 @@ class Main():
         counter = [1]
         def pool_do(song_dict: dict):
             a = counter[0]
+            counter[0] += 1
             song = Song().init_with_dict(song_dict)
-            download_path = f"Z:\\歌\\{song.get_file_name()}"
+            download_dir = self.confc.get("download_dir")
+            download_path = f"{download_dir}{song.get_file_name()}"
             if(not pathlib.Path(download_path).exists()):
                 dl = Downloader(song.url, download_path)
                 print(f"下载#{a}: {download_path}")
                 dl.start()
                 print(f"完成#{a}: {download_path}")
-            counter[0] += 1
         pool = Pool(processes = 4)
         pool.map(
             pool_do,
