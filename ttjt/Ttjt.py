@@ -34,10 +34,13 @@ class Ttjt():
         # print(f"search_music: {music_name}")
         return self. music_search_resv_data
     
-    def get_music_by_singer_name(self, name_of_singer: str) -> Song:
+    def get_music_by_singer_name(self, music_name:str, name_of_singer: str) -> Song:
         for i in self.music_search_resv_data:
             # print(f'{str(i["author"])} -- {name_of_singer}')
-            if(str(i["author"]).find(name_of_singer) != -1):
+            if(
+                str(i["author"]).find(name_of_singer) != -1 and
+                str(i["title"]).find(music_name) != -1
+            ):
                 return_song = Song()
                 return_song.author = i["author"]
                 return_song.lrc = i["lrc"]

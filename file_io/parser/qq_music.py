@@ -37,10 +37,19 @@ class Parser:
         while True:
             try:
                 music_name,music_songer = self.next_music()
-                return_list.append({
-                    "music_name": music_name,
-                    "music_songer": music_songer
-                })
+                can_add = True
+                for i in return_list:
+                    if(
+                        music_name == i["music_name"] and
+                        music_songer == i["music_songer"]
+                    ):
+                        can_add = False
+                        break
+                if can_add:
+                    return_list.append({
+                        "music_name": music_name,
+                        "music_songer": music_songer
+                    })
             except:
                 break
         return return_list

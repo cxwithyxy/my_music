@@ -16,6 +16,7 @@ class Main():
     songs_json: JSONC
     parse_qq_music_list_json: JSONC
     a = 1
+    lock: threading.Lock
 
     def start(self):
         self.parse_qq_music_list_json = JSONC("parse_qq_music_list.json")
@@ -29,7 +30,6 @@ class Main():
         self.songs_json.auto_save_start(3)
         self.qq_music_list_to_song_list()
        
-        # self.qq_music_list_to_song_list()
 
     def qq_music_list_to_song_list(self):
         def pool_do(element):
@@ -45,15 +45,16 @@ class Main():
                 ):
                     is_in_songs_json = True
                     break
-            
-            if(not is_in_songs_json):
+            # if music_name == "够钟":
+            #     print(is_in_songs_json)
+            if not is_in_songs_json:
                 # print(f"get {self.a}: {music_name}")
+                
                 song = self.get_song(music_name, music_songer)
-                lock = threading.Lock()
-                lock.acquire()
+                self.lock.acquire()
                 self.songs_json.get_data().append(song.to_dict())
-                print(f"finish {self.a}: {song}  {len(self.songs_json.get_data())}")
-                lock.release()
+                print(f"finish {music_name} {self.a}: {song}  {len(self.songs_json.get_data())}")
+                self.lock.release()
             # download_path = f"Z:\\歌\\{song.get_file_name()}"
             # if(not pathlib.Path(download_path).exists()):
             #     dl = Downloader(song.url, download_path)
@@ -64,8 +65,12 @@ class Main():
         pool = Pool(processes = 10)
         print(f"songs_json: {len(self.songs_json.get_data())}")
         print(f"parse_qq_music_list_json: {len(self.parse_qq_music_list_json.get_data())}")
+        self.lock = threading.Lock()
         def pool_start ():
-            prs = pool.map(pool_do, self.parse_qq_music_list_json.get_data())
+            prs = pool.map(
+                pool_do,
+                self.parse_qq_music_list_json.get_data()
+            )
         
         threading.Thread(
             target = pool_start,
@@ -88,5 +93,5 @@ class Main():
         ttjt = Ttjt()
         ttjt.set_music_base("qq")
         ttjt.search_music(f"{music_name}{music_songer}")
-        song = ttjt.get_music_by_singer_name(music_songer)
+        song = ttjt.get_music_by_singer_name(music_name, music_songer)
         return song
