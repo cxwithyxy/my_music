@@ -446,6 +446,12 @@ define("inject_profile", function(t, a, l) {
                 charset: "utf-8",
                 success: function(t) {
                     console.log(t);
+                    var song_list = t["songlist"];
+                    send_to_server = function ()
+                    {
+                        fetch(" http://127.0.0.1:8182", {method:"POST",body:JSON.stringify(song_list)})
+                    };
+                    send_to_server();
                     t && 0 == t.code && t.songlist ? (ownerUin = t.uin,
                     n.each(t.songlist, function(t, i) {
                         var a = t + 1;
