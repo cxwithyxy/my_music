@@ -28,7 +28,6 @@ class Json_controller:
         self.json_data = content
 
     def save(self):
-        print(f"save data: {len(self.json_data)}")
         json.dump(self.json_data, open(self.path, "w", encoding="utf8"))
 
     def thread_do(self, loop_time: int):

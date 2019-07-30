@@ -27,7 +27,7 @@ class Ttjt():
                 )
                 break
             except BaseException as e:
-                print(f"超时, 继续: {music_name}")
+                print(f"超时--重试: {music_name}")
                 pass
         # print(f"end {music_name}")
         self. music_search_resv_data = a.json()['data']
