@@ -1,0 +1,348 @@
+[
+    {
+        "id": 203441354,
+        "type": 0,
+        "songtype": 13,
+        "mid": "003sHLjx4fH49a",
+        "name": "差半步",
+        "title": "差半步",
+        "subtitle": "",
+        "interval": 251,
+        "isonly": 1,
+        "language": 1,
+        "genre": 1,
+        "index_cd": 0,
+        "index_album": 2,
+        "status": 0,
+        "fnote": 4009,
+        "url": "http://stream0.qqmusic.qq.com/215441354.wma",
+        "time_public": "2017-07-28",
+        "singer": [
+            {
+                "id": 5021,
+                "mid": "0018IojC2R0SZW",
+                "name": "卫兰",
+                "title": "卫兰"
+            }
+        ],
+        "album": {
+            "id": 2186895,
+            "mid": "002P2SuE0h6hUW",
+            "name": "Love And Other Things",
+            "title": "Love And Other Things",
+            "subtitle": ""
+        },
+        "mv": {
+            "id": 1353290,
+            "vid": "p0024zlf200"
+        },
+        "ksong": {
+            "id": 0,
+            "mid": "003clIE02VpTo7"
+        },
+        "file": {
+            "media_mid": "002vfcZc0BriVV",
+            "size_try": 0,
+            "b_30s": 0,
+            "e_30s": 0,
+            "try_begin": 67243,
+            "try_end": 102178,
+            "size_24aac": 784503,
+            "size_48aac": 1541467,
+            "size_96aac": 3081432,
+            "size_192aac": 6089637,
+            "size_192ogg": 5322366,
+            "size_128mp3": 4024339,
+            "size_320mp3": 10060505,
+            "size_aac": 1541467,
+            "size_ogg": 5322366,
+            "size_128": 4024339,
+            "size_320": 10060505,
+            "size_ape": 0,
+            "size_flac": 24175076,
+            "size_dts": 0
+        },
+        "volume": {
+            "gain": 0,
+            "peak": 0,
+            "lra": 0
+        },
+        "pay": {
+            "pay_month": 1,
+            "price_track": 200,
+            "price_album": 0,
+            "pay_play": 0,
+            "pay_down": 1,
+            "pay_status": 0,
+            "time_free": 0
+        },
+        "action": {
+            "switch": 17413891,
+            "msgid": 14,
+            "msgpay": 6,
+            "alert": 2,
+            "icons": 147324
+        }
+    },
+    {
+        "id": 200634369,
+        "type": 0,
+        "songtype": 13,
+        "mid": "002mUc3U31pGD5",
+        "name": "孤雏",
+        "title": "孤雏",
+        "subtitle": "",
+        "interval": 293,
+        "isonly": 1,
+        "language": 1,
+        "genre": 1,
+        "index_cd": 2,
+        "index_album": 26,
+        "status": 0,
+        "fnote": 4009,
+        "url": "http://stream0.qqmusic.qq.com/212634369.wma",
+        "time_public": "2016-11-15",
+        "singer": [
+            {
+                "id": 158520,
+                "mid": "002XVZaw3X63Kp",
+                "name": "AGA",
+                "title": "AGA"
+            }
+        ],
+        "album": {
+            "id": 1840139,
+            "mid": "001sufny4YlSqs",
+            "name": "Ginadoll Concert Live",
+            "title": "Ginadoll Concert Live",
+            "subtitle": ""
+        },
+        "mv": {
+            "id": 793485,
+            "vid": "p0020tuhnrx"
+        },
+        "ksong": {
+            "id": 0,
+            "mid": "002tbFiK1Er20q"
+        },
+        "file": {
+            "media_mid": "0015fed22BM8zd",
+            "size_try": 0,
+            "b_30s": 0,
+            "e_30s": 0,
+            "try_begin": 70438,
+            "try_end": 117652,
+            "size_24aac": 909731,
+            "size_48aac": 1784627,
+            "size_96aac": 3572531,
+            "size_192aac": 7099074,
+            "size_192ogg": 6600211,
+            "size_128mp3": 4694745,
+            "size_320mp3": 11736191,
+            "size_aac": 1784627,
+            "size_ogg": 6600211,
+            "size_128": 4694745,
+            "size_320": 11736191,
+            "size_ape": 0,
+            "size_flac": 32019376,
+            "size_dts": 0
+        },
+        "volume": {
+            "gain": 0,
+            "peak": 0,
+            "lra": 0
+        },
+        "pay": {
+            "pay_month": 1,
+            "price_track": 200,
+            "price_album": 0,
+            "pay_play": 0,
+            "pay_down": 1,
+            "pay_status": 0,
+            "time_free": 0
+        },
+        "action": {
+            "switch": 17413891,
+            "msgid": 14,
+            "msgpay": 6,
+            "alert": 2,
+            "icons": 147324
+        }
+    },
+    {
+        "id": 201605113,
+        "type": 0,
+        "songtype": 13,
+        "mid": "0007E0Qv315Jyo",
+        "name": "3AM",
+        "title": "3AM",
+        "subtitle": "",
+        "interval": 266,
+        "isonly": 1,
+        "language": 1,
+        "genre": 1,
+        "index_cd": 0,
+        "index_album": 1,
+        "status": 0,
+        "fnote": 4009,
+        "url": "http://stream2.qqmusic.qq.com/213605113.wma",
+        "time_public": "2017-06-30",
+        "singer": [
+            {
+                "id": 158520,
+                "mid": "002XVZaw3X63Kp",
+                "name": "AGA",
+                "title": "AGA"
+            },
+            {
+                "id": 24087,
+                "mid": "0016Mu0F0RmnKu",
+                "name": "Ghost Style",
+                "title": "Ghost Style"
+            }
+        ],
+        "album": {
+            "id": 2135115,
+            "mid": "001EouVY1Fz0c5",
+            "name": "3AM",
+            "title": "3AM",
+            "subtitle": ""
+        },
+        "mv": {
+            "id": 1209227,
+            "vid": "b0023vbe3ei"
+        },
+        "ksong": {
+            "id": 0,
+            "mid": "003GK0Ih1L8dwg"
+        },
+        "file": {
+            "media_mid": "0035HdB13uijrQ",
+            "size_try": 0,
+            "b_30s": 0,
+            "e_30s": 0,
+            "try_begin": 61662,
+            "try_end": 89712,
+            "size_24aac": 824542,
+            "size_48aac": 1613627,
+            "size_96aac": 3250695,
+            "size_192aac": 6413403,
+            "size_192ogg": 6347290,
+            "size_128mp3": 4261705,
+            "size_320mp3": 10653973,
+            "size_aac": 1613627,
+            "size_ogg": 6347290,
+            "size_128": 4261705,
+            "size_320": 10653973,
+            "size_ape": 0,
+            "size_flac": 31213328,
+            "size_dts": 0
+        },
+        "volume": {
+            "gain": 0,
+            "peak": 0,
+            "lra": 0
+        },
+        "pay": {
+            "pay_month": 1,
+            "price_track": 200,
+            "price_album": 0,
+            "pay_play": 0,
+            "pay_down": 1,
+            "pay_status": 0,
+            "time_free": 0
+        },
+        "action": {
+            "switch": 17413891,
+            "msgid": 14,
+            "msgpay": 6,
+            "alert": 2,
+            "icons": 147324
+        }
+    },
+    {
+        "id": 105664146,
+        "type": 0,
+        "songtype": 13,
+        "mid": "00314mUH1UwEeD",
+        "name": "圆",
+        "title": "圆",
+        "subtitle": "",
+        "interval": 254,
+        "isonly": 1,
+        "language": 1,
+        "genre": 1,
+        "index_cd": 0,
+        "index_album": 5,
+        "status": 0,
+        "fnote": 4009,
+        "url": "http://stream7.qqmusic.qq.com/117664146.wma",
+        "time_public": "2016-03-14",
+        "singer": [
+            {
+                "id": 158520,
+                "mid": "002XVZaw3X63Kp",
+                "name": "AGA",
+                "title": "AGA"
+            }
+        ],
+        "album": {
+            "id": 1293807,
+            "mid": "000V9yae4XbyxL",
+            "name": "Ginadoll",
+            "title": "Ginadoll",
+            "subtitle": "《Wonderful U》粤语版"
+        },
+        "mv": {
+            "id": 671550,
+            "vid": "l0019qjxf0z"
+        },
+        "ksong": {
+            "id": 0,
+            "mid": "000ZKzcE0fZzKV"
+        },
+        "file": {
+            "media_mid": "004Jg3SM0ouN8N",
+            "size_try": 0,
+            "b_30s": 0,
+            "e_30s": 0,
+            "try_begin": 68791,
+            "try_end": 108900,
+            "size_24aac": 783128,
+            "size_48aac": 1532155,
+            "size_96aac": 3093685,
+            "size_192aac": 6101776,
+            "size_192ogg": 5618838,
+            "size_128mp3": 4067360,
+            "size_320mp3": 10168102,
+            "size_aac": 1532155,
+            "size_ogg": 5618838,
+            "size_128": 4067360,
+            "size_320": 10168102,
+            "size_ape": 26274820,
+            "size_flac": 26217987,
+            "size_dts": 0
+        },
+        "volume": {
+            "gain": 0,
+            "peak": 0,
+            "lra": 0
+        },
+        "pay": {
+            "pay_month": 1,
+            "price_track": 200,
+            "price_album": 0,
+            "pay_play": 0,
+            "pay_down": 1,
+            "pay_status": 0,
+            "time_free": 0
+        },
+        "action": {
+            "switch": 17413891,
+            "msgid": 14,
+            "msgpay": 6,
+            "alert": 2,
+            "icons": 147324
+        }
+    }
+]

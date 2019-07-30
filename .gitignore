@@ -1,3 +1,5 @@
 venv/
 *.pyc
 .vscode/
+songs.json
+parse_qq_music_list.json
