@@ -33,8 +33,8 @@ if __name__ == '__main__':
         for i in mainrun_dict:
             print(f"{i}: {mainrun_dict[i]['descr']}")
 
-
-    print("\n\n系统启动(输入 q 退出)\n\n")
+    print("\n\n===== my_music v1.201907311043 =====\n\n")
+    print("系统启动(输入 q 退出)\n")
     show_menu()
 
     while(True):
