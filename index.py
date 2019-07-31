@@ -1,5 +1,6 @@
 if __name__ == '__main__':
     import threading
+    import time
     from controller.download_qq_music import Main as  Main_download_qq_music
     from controller.qq_music_list_httpserver import Main as Main_qq_music_list_httpserver
     
@@ -40,7 +41,8 @@ if __name__ == '__main__':
     while(True):
         q=input("\n==>\n")
         if(q=="q"):
-            print("exit")
+            print("exitting...")
+            time.sleep(3)
             exit()
         mainrun(q)
-        
+    
