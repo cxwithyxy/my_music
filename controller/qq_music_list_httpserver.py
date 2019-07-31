@@ -15,7 +15,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         body = self.rfile.read(content_length)
         song_list = json.loads(body)
         
-        print(f"receive song_list({len(song_list)}), shutdown server now !")
+        print(f"receive song_list({len(song_list)})")
         
         self.server.song_list = song_list
         self.send_response(200)
@@ -42,12 +42,12 @@ class Main():
 
     def start(self):
         httpd = SimpleHTTPServer(('localhost', 8182), SimpleHTTPRequestHandler)
-        print("\n\n server start \n\n")
+        print("\n\nqq_music_list receive server start \n\n")
         httpd.serve_forever()
-        print(len(httpd.song_list))
+        print(f"\nserver shutdown !")
         qq_music_list_path = self.confc.get("qq_music_list")
         jsonc = JSONC(qq_music_list_path)
         jsonc.set_data(httpd.song_list)
         jsonc.save()
-        print(f"save ({len(jsonc.get_data())}) success {qq_music_list_path}")
+        print(f"\nsave ({len(jsonc.get_data())}) in {qq_music_list_path} successfully !")
 

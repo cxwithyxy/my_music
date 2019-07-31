@@ -23,34 +23,18 @@ class Main():
         self.confc.cd("path_set")
 
     def start(self):
-        
-        def main_start ():
-            self.parse_qq_music_list_json = JSONC(self.confc.get("parse_qq_music_list"))
-            if(not self.parse_qq_music_list_json.file_is_exists()):
-                self.qq_parser = QQParser(self.confc.get("qq_music_list"))
-                parse_qq_music = self.qq_parser.get_parse_qq_music_list()
-                self.parse_qq_music_list_json.set_data(parse_qq_music)
-                self.parse_qq_music_list_json.save()
-                print("保存 parse_qq_music_list.json 成功")
-             
-            self.songs_json = JSONC(self.confc.get("songs"))
-            self.qq_music_list_to_song_list()
+        self.parse_qq_music_list_json = JSONC(self.confc.get("parse_qq_music_list"))
+        if(not self.parse_qq_music_list_json.file_is_exists()):
+            self.qq_parser = QQParser(self.confc.get("qq_music_list"))
+            parse_qq_music = self.qq_parser.get_parse_qq_music_list()
+            self.parse_qq_music_list_json.set_data(parse_qq_music)
+            self.parse_qq_music_list_json.save()
+            print("保存 parse_qq_music_list.json 成功")
+            
+        self.songs_json = JSONC(self.confc.get("songs"))
+        self.qq_music_list_to_song_list()
 
-            self.download_base_songs()
-        
-        threading.Thread(
-            target = main_start,
-            args = (),
-            daemon = True
-        ).start()
-
-        while(True):
-            q=input("\n\n系统启动(输入 q 退出)==>\n\n")
-            if(q=="q"):
-                print("exit")
-                exit()
-            if(q=="qq"):
-                self.songs_json.auto_save_stop()
+        self.download_base_songs()
 
     def qq_music_list_to_song_list(self):
         counter = [1]
