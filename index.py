@@ -4,14 +4,20 @@ if __name__ == '__main__':
     from controller.qq_music_list_httpserver import Main as Main_qq_music_list_httpserver
     
     mainrun_dict = {
-        "1": Main_qq_music_list_httpserver,
-        "2": Main_download_qq_music
+        "1": {
+            "main": Main_qq_music_list_httpserver,
+            "descr": "启动 qq_music_list 接收服务器"
+        },
+        "2": {
+            "main": Main_download_qq_music,
+            "descr": "开始同步 songs.json 并下载 music"
+        }
     }
 
     def mainrun(key: str):
         func = None
         try:
-            func = mainrun_dict[key]().start
+            func = mainrun_dict[key]["main"]().start
         except KeyError as e:
             print(f"we do not have this command({key})")
         if func:
@@ -21,7 +27,13 @@ if __name__ == '__main__':
                 daemon = True
             ).start()
 
+    def show_menu():
+        for i in mainrun_dict:
+            print(f"{i}: {mainrun_dict[i]['descr']}")
+
+
     print("\n\n系统启动(输入 q 退出)\n\n")
+    show_menu()
     while(True):
         q=input("\n==>\n")
         if(q=="q"):
