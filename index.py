@@ -19,7 +19,8 @@ if __name__ == '__main__':
         try:
             func = mainrun_dict[key]["main"]().start
         except KeyError as e:
-            print(f"we do not have this command({key})")
+            print(f"Error: we do not have this command({key})")
+            show_menu()
         if func:
             threading.Thread(
                 target = func,
@@ -28,15 +29,18 @@ if __name__ == '__main__':
             ).start()
 
     def show_menu():
+        print("\n===== menu =====\n")
         for i in mainrun_dict:
             print(f"{i}: {mainrun_dict[i]['descr']}")
 
 
     print("\n\n系统启动(输入 q 退出)\n\n")
     show_menu()
+
     while(True):
         q=input("\n==>\n")
         if(q=="q"):
             print("exit")
             exit()
         mainrun(q)
+        
