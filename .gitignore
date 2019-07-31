@@ -1,0 +1,9 @@
+venv/
+*.pyc
+.vscode/
+songs.json
+parse_qq_music_list.json
+setting.ini
+qq_music_list.json
+dist/
+build/
