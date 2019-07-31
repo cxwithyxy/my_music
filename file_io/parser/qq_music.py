@@ -1,4 +1,9 @@
 from file_io.Json_controller import Json_controller as JSONC
+import pathlib
+
+class not_found(BaseException):
+    pass
+
 class Parser:
     """Parser 歌单json解析器
     
@@ -10,6 +15,8 @@ class Parser:
     iter_qq_music_list: iter
 
     def __init__(self, json_path: str):
+        if not pathlib.Path(json_path).exists():
+            raise not_found(f"找不到文件({json_path})，确定已经获取 qq_music_list 了吗？")
         self.qq_music_list = JSONC(json_path).get_data()
         self.iter_qq_music_list = iter(self.qq_music_list)
 
